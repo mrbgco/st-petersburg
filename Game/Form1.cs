@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
-namespace DrawChart
+namespace Game
 {
-    public partial class Simulation : UserControl
+    public partial class Form1 : Form
     {
-        public Simulation()
+        public Form1()
         {
             InitializeComponent();
         }
 
-        private void start_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
+            this.chart.Series.Clear();
+            chart.Titles.Add("Simulation Result");
             this.chart.Series.Clear();
             const int numberOfGames = 10000;
             var maxBudget = Math.Pow(10, 7);
@@ -35,6 +36,8 @@ namespace DrawChart
                 series.Points.Add(gameScores[i]);
             }
 
+            chart.ChartAreas[0].AxisY.Title = "Money Won";
+            chart.ChartAreas[0].AxisX.Title = "Game(s)";
             chart.ChartAreas[0].RecalculateAxesScale();
 
         }
@@ -51,12 +54,6 @@ namespace DrawChart
 
                 round++;
             }
-        }
-
-        private void Simulation_Load(object sender, EventArgs e)
-        {
-            this.chart.Series.Clear();
-            chart.Titles.Add("Simulation Result");
         }
     }
 }
